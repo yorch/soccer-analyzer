@@ -1,0 +1,1 @@
+GUARDIAN_CONTENT_API_KEY = 'grrsv5nuhrfrd4rup23wfbzj'

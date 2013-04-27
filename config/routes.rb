@@ -1,4 +1,13 @@
-BigdataHack::Application.routes.draw do
+SoccerAnalyzer::Application.routes.draw do
+
+  devise_for :users
+
+  mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
+
+  get "test/index"
+  
+  resources :articles
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -55,4 +64,8 @@ BigdataHack::Application.routes.draw do
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.
   # match ':controller(/:action(/:id))(.:format)'
+  root :to => 'home#index'
+
+  match 'obtain' => 'home#search_guardian_api'
+  match 'get_data' => 'home#get_data'
 end

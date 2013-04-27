@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-BigdataHack::Application.load_tasks
+SoccerAnalyzer::Application.load_tasks

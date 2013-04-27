@@ -1,0 +1,51 @@
+<script>
+(function($){ // encapsulate jQuery
+
+  $(function () {
+        $('#container').highcharts({
+            chart: {
+                type: 'spline'
+            },
+            title: {
+                text: '<%= @person %>'
+            },
+            // subtitle: {
+            //     text: 'Source: WorldClimate.com',
+            //     x: -20
+            // },
+            xAxis: {
+              type: 'datetime'
+              //#categories: <%= raw @data.map { |d| d.date.strftime("%Y-%m-%d") } %>
+            },
+            yAxis: {
+                title: {
+                    text: 'Sentiment'
+                },
+                plotLines: [{
+                    value: 0,
+                    width: 1,
+                    color: '#808080'
+                }]
+            },
+            tooltip: {
+                valueSuffix: '°C'
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'top',
+                x: -10,
+                y: 100,
+                borderWidth: 0
+            },
+            series: [{
+                name: '',
+                //data: <%= @data.map { |d| d.sentiment } %>
+                data: <%= raw @data.map { |d| "Date.UTC(#{d.date.strftime('%Y')}, #{d.date.strftime('%m')}, #{d.date.strftime('%d')}" } %>
+            }]
+        });
+    });
+})(jQuery);
+
+</script>
+<div id="container"></div>

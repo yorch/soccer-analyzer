@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Source:</b>
+  <%= @article.source %>
+</p>
+
+<p>
+  <b>Original:</b>
+  <%= @article.original_id %>
+</p>
+
+<p>
+  <b>Url:</b>
+  <%= @article.url %>
+</p>
+
+<p>
+  <b>Content:</b>
+  <%= @article.content %>
+</p>
+
+<p>
+  <b>Data:</b>
+  <%= @article.data %>
+</p>
+
+
+
+<%= link_to 'Edit', edit_article_path(@article) %> |
+<%= link_to 'Back', articles_path %>
