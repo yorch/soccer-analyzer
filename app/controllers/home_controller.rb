@@ -38,18 +38,4 @@ class HomeController < ApplicationController
     @data1 = ArticleEntity.joins(:article).where(:entity_id => entity1.id).order('articles.date ASC')
     @data2 = ArticleEntity.joins(:article).where(:entity_id => entity2.id).order('articles.date ASC')
   end
-
-  def get_data
-    entity = Entity.where(:name => 'Alan Pardew').first
-    data = ArticleEntity.where(:entity_id => entity.id)
-    # respond_to do |format|
-    #   #format.json { render :json => data }
-    #   format.json { render :file => "get_data.json.erb", :content_type => 'application/json' }
-    # end
-    render :file => "get_data.json.erb", :content_type => 'application/json'
-
-    # respond_with({
-    #   :data => data.as_json(:only => [:date, :sentiment], :methods => [:date]),
-    # })
-  end
 end

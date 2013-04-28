@@ -46,12 +46,13 @@
     });
 })(jQuery);
 </script>
+
 <form method="get">
-<select id="person-select" name="person">
-  <% @people.each do |p| %>
-    <option value="<%= p.id %>"><%= p.name %></option>
-  <% end %>
-</select>
+  <select id="person-select" name="person">
+    <% @people.each do |p| %>
+      <option value="<%= p.id %>"><%= p.name %></option>
+    <% end %>
+  </select>
 </form>
 
 <div id="container"></div>
