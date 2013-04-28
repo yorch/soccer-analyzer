@@ -3,4 +3,6 @@ class Article < ActiveRecord::Base
 
   serialize :data, ActiveRecord::Coders::Hstore
   serialize :extra_data, ActiveRecord::Coders::Hstore
+
+  default_scope :order => "date ASC"
 end

@@ -7,15 +7,10 @@
                 type: 'spline'
             },
             title: {
-                text: '<%= @person %>'
+                text: '<%= @person1 %> vs <%= @person2 %>'
             },
-            // subtitle: {
-            //     text: 'Source: WorldClimate.com',
-            //     x: -20
-            // },
             xAxis: {
               type: 'datetime'
-              //#categories: <%= raw @data.map { |d| d.date.strftime("%Y-%m-%d") } %>
             },
             yAxis: {
                 title: {
@@ -39,19 +34,29 @@
                 borderWidth: 0
             },
             series: [{
-                name: 'Sentiment',
-                data: [<% @data.each { |d| concat "[Date.UTC(#{d.date.strftime('%Y')}, #{d.date.strftime('%m')}, #{d.date.strftime('%d')}), #{d.sentiment}]," } %>]
+                name: '<%= @person1 %>',
+                data: [<% @data1.each { |d| concat "[Date.UTC(#{d.date.strftime('%Y')}, #{d.date.strftime('%m')}, #{d.date.strftime('%d')}), #{d.sentiment}]," } %>]
+            },
+            {
+                name: '<%= @person2 %>',
+                data: [<% @data2.each { |d| concat "[Date.UTC(#{d.date.strftime('%Y')}, #{d.date.strftime('%m')}, #{d.date.strftime('%d')}), #{d.sentiment}]," } %>]
             }]
         });
     });
 })(jQuery);
 </script>
 <form method="get">
-<select id="person-select" name="person">
-  <% @people.each do |p| %>
-    <option value="<%= p.id %>"><%= p.name %></option>
-  <% end %>
-</select>
+    <select name="person1">
+      <% @people.each do |p| %>
+        <option value="<%= p.id %>"><%= p.name %></option>
+      <% end %>
+    </select>
+    <select name="person2">
+      <% @people.each do |p| %>
+        <option value="<%= p.id %>"><%= p.name %></option>
+      <% end %>
+    </select>
+    <button type="submit">Submit</button>
 </form>
 
 <div id="container"></div>

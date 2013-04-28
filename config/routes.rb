@@ -66,6 +66,8 @@ SoccerAnalyzer::Application.routes.draw do
   # match ':controller(/:action(/:id))(.:format)'
   root :to => 'home#index'
 
+  match 'index2' => 'home#index2'
+  
   match 'obtain' => 'home#search_guardian_api'
   match 'get_data' => 'home#get_data'
 end

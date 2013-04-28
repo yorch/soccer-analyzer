@@ -35,7 +35,6 @@ class SemantriaAPI
     # We also will use compression.
     session = Semantria::Session.new(@@consumer_key, @@consumer_secret, 'TestApp', true)
     # Initialize session callback handlers
-    #callback = SessionCallbackHandler.new()
     callback = SessionCallbackHandler.new()
     session.setCallbackHandler(callback)
 
@@ -76,7 +75,7 @@ class SemantriaAPI
         # Find or create entities
         entity = Entity.where(:name => raw_entity['title'], :entity_type => raw_entity['entity_type']).first
         if !entity
-          entity = Entity.create(:name => raw_entity['title'], :entity_type => raw_entity['entity_type'])
+          entity = Entity.create(:name => raw_entity['title'].slice(0, 200), :entity_type => raw_entity['entity_type'])
           puts "Creating new Entity #{entity.name} (#{entity.entity_type})"
         end
 
@@ -93,55 +92,4 @@ class SemantriaAPI
       article.save
     end
   end
-
-  # def self.retrieve
-  #   # Initializes new session with the keys and app name.
-  #   # We also will use compression.
-  #   session = Semantria::Session.new(@@consumer_key, @@consumer_secret, 'TestApp', true)
-  #   # Initialize session callback handlers
-  #   callback = SessionCallbackHandler.new()
-  #   session.setCallbackHandler(callback)
-
-  #   length = 10
-  #   results = []
-
-  #   while results.length < length
-  #     # As Semantria isn't real-time solution you need to wait some time before getting of the processed results
-  #     # In real application here can be implemented two separate jobs, one for queuing of source data another one for retreiving
-  #     # Wait ten seconds while Semantria process queued document
-  #     #  sleep(10)
-  #     # Requests processed results from Semantria service
-  #     status = session.getProcessedDocuments()
-  #     # Check status from Semantria service
-  #     status.is_a? Array and status.each do |object|
-  #       results.push(object)
-  #     end
-  #     print status.length, ' documents received successfully.', "\r\n"
-  #   end
-
-  #   results.each do |data|
-  #     #article = Article.where(:original_id => data['id']).first
-  #     article = Article.find(data['id']).first
-
-  #     if true #article
-  #       puts "Using article #{article.title}"
-        
-  #       data['entities'].nil? or data['entities'].each do |raw_entity|
-  #         # Find or create entities
-  #         entity = Entity.where(:name => raw_entity['title'], :type => raw_entity['entity_type']).first
-  #         if !entity
-  #           entity = Entity.create(:name => raw_entity['title'], :type => raw_entity['entity_type'])
-  #           puts "Creating new Entity #{entity.name} (#{entity.type})"
-  #         end
-
-  #         # Create ArticleEntity instance and article, entity, sentiment
-  #         article_entity = ArticleEntity.new
-  #         article_entity.article = article
-  #         article_entity.entity = entity
-  #         article_entity.sentiment = raw_entity['sentiment_score'].to_f
-  #         article_entity.save
-  #       end
-  #     end
-  #   end
-  # end
 end
